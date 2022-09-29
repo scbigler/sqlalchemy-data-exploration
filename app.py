@@ -42,16 +42,24 @@ def welcome():
         f"/api/v1.0/precipitation<br/>"
         f"/api/v1.0/stations<br/>"
         f"/api/v1.0/tobs<br/>"
-        f"/api/v1.0/<start><br/>"
-        f"/api/v1.0/<start>/<end><br/>"
+        f"/api/v1.0/temp/<start><br/>"
+        f"/api/v1.0/temp/<start>/<end><br/>"
     )
 
 
 @app.route("/api/v1.0/precipitation")
 def precipitation():
     
+    # precipitation data for the last year of data
+    most_recent = session.query(Measurement.date).order_by(Measurement.date.desc()).first()
+    most_recent = pd.to_datetime(most_recent[0])
+    day = int(most_recent.strftime("%d"))
+    month = int(most_recent.strftime("%m"))
+    year = int(most_recent.strftime("%Y"))
+    one_year_prior = dt.date(year, month, day) - dt.timedelta(365)
+    
     results = session.query(Measurement.date, Measurement.prcp).\
-    filter(Measurement.date > '2016-08-23').\
+    filter(Measurement.date > one_year_prior).\
     order_by(Measurement.date).all()
     
     # Calculate the date 1 year ago from last date in database
@@ -105,12 +113,29 @@ def temp_monthly():
    
 
 @app.route("/api/v1.0/temp/<start>")
+def stats1(start=None):
+    """Return TMIN, TAVG, TMAX."""
+    # calculate date of most recent data
+    most_recent = session.query(Measurement.date).order_by(Measurement.date.desc()).first()
+    
+     # calculate TMIN, TAVG, TMAX with start until the most recent data
+    tempstats = session.query(func.min(Measurement.tobs), func.avg(Measurement.tobs),\
+            func.max(Measurement.tobs)).\
+            filter(Measurement.date >= start).\
+            filter(Measurement.date <= most_recent[0]).all()
+    
+    # Unravel results into a 1D array and convert to a list
+    mystats = list(np.ravel(tempstats))
+    
+    return jsonify(mystats)
+
+
 @app.route("/api/v1.0/temp/<start>/<end>")
-def stats(start=None, end=None):
+def stats2(start=None, end=None):
     """Return TMIN, TAVG, TMAX."""
     
     # Select statement
-    # calculate TMIN, TAVG, TMAX with start and stop
+   # calculate TMIN, TAVG, TMAX with start until end
     tempstats = session.query(func.min(Measurement.tobs), func.avg(Measurement.tobs),\
             func.max(Measurement.tobs)).\
             filter(Measurement.date >= start).\
