@@ -21,7 +21,7 @@ The Flask applicaiton was created so that the climate data can be accessible via
 ## Data Analysis and Exploration
 
 First, set up base, create classes for each table, and connect to the sqlite database.
-![Code1](/images/code1.png)
+![Code5](/images/code5.png)
 
 Climate Analysis: Obtain the last 12 months of precipitation data, convert into a data frame, and plot a bar chart.
 ![Code2](/images/code2.png)
@@ -39,3 +39,4 @@ Station Analysis: Calculate the total number of stations, find the most active s
 Design a Flask API based on the queries that were developed during the climate analysis.
 
 NOTE: dependencies and set-up were identical to the climate analysis overview except for the engine and session creation.
+![Code1](/images/code1.png)
