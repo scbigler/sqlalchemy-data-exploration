@@ -85,7 +85,6 @@ def stations():
     return jsonify(station_list)
     
 
-###### the 'tobs' route you will query and return the data Day 3 Activity 10
 @app.route("/api/v1.0/tobs")
 def temp_monthly():
     """Return the temperature observations (tobs) for previous year."""
