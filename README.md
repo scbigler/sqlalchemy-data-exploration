@@ -21,8 +21,7 @@ The Flask applicaiton was created so that the climate data can be accessible via
 ## Data Analysis and Exploration
 
 First, set up base, create classes for each table, and connect to the sqlite database.
-
-
+![Code1](/images/code1.png)
 
 
 ![Precipitation](/images/precip.png)
