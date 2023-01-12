@@ -39,4 +39,4 @@ Station Analysis: Calculate the total number of stations, find the most active s
 Design a Flask API based on the queries that were developed during the climate analysis.
 
 NOTE: dependencies and set-up were identical to the climate analysis overview except for the engine and session creation.
-![Code1](/images/code1.png)
+![Flask](/images/flask.png)
