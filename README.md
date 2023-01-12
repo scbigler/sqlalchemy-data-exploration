@@ -40,3 +40,18 @@ Design a Flask API based on the queries that were developed during the climate a
 
 NOTE: dependencies and set-up were identical to the climate analysis overview except for the engine and session creation.
 ![Flask](/images/flask.png)
+
+### Home Page Route
+![Home](/images/home_route.png)
+
+### Precipitation Route
+![Precipitation](/images/precipitation_route.png)
+
+### Stations Route
+![Stations](/images/stations_route.png)
+
+### Temperature Observations Route (tobs)
+![tobs](/images/tobs_route.png)
+
+### Start - End for Given Dates Route
+![Flask](/images/start_end_route.png)
